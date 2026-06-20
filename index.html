@@ -266,8 +266,18 @@ transform:translateY(110vh) rotate(720deg);
 
 <!-- PASSCODE PAGE -->
 <div class="screen gingham active" id="login">
-<div class="card">
-<h1>💖 Mono Shri 💖</h1>
+   <div id="countdownScreen">
+  <h1 style="color:#ff6b81;">🎂 Birthday Countdown 🎂</h1>
+
+  <div id="countdown">
+    ⏳ Loading...
+  </div>
+
+  <p style="margin-top:15px;color:#555;">
+    The surprise unlocks when the countdown ends 💖
+  </p>
+</div>
+<div class="card" id="loginCard" style="display:none;"><h1>💖 Mono Shri 💖</h1>
 <p>Enter the Secret Code</p>
    <div id="countdown" style="
 margin:15px 0;
@@ -497,15 +507,22 @@ setTimeout(()=>h.remove(),6000);
 }
    function updateCountdown(){
 
-  const birthday = new Date("2026-06-21T00:00:00"); // Change date
-
+  const birthday = new Date("2026-06-21T00:00:00");
   const now = new Date();
 
   const diff = birthday - now;
 
   if(diff <= 0){
+
     document.getElementById("countdown").innerHTML =
-      "🎂 It's Birthday Time! 🎉";
+      "🎉 Surprise Unlocked! 🎉";
+
+    document.getElementById("countdownScreen").style.display = "none";
+
+    document.getElementById("loginCard").style.display = "block";
+
+    clearInterval(countdownTimer);
+
     return;
   }
 
@@ -515,11 +532,11 @@ setTimeout(()=>h.remove(),6000);
   const secs = Math.floor((diff / 1000) % 60);
 
   document.getElementById("countdown").innerHTML =
-    `🎂 ${days}d ${hours}h ${mins}m ${secs}s`;
+    `⏳ ${days}d ${hours}h ${mins}m ${secs}s`;
 }
 
 updateCountdown();
-setInterval(updateCountdown,1000);
+const countdownTimer = setInterval(updateCountdown,1000);
 </script>
  
 
