@@ -15,6 +15,18 @@ font-family:'Trebuchet MS',sans-serif;
 }
 
 body{
+   #countdown{
+background:#fff0f5;
+padding:12px;
+border-radius:15px;
+box-shadow:0 4px 10px rgba(0,0,0,.1);
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.05);}
+}
 background:#fff9df;
 overflow:hidden;
 }
@@ -253,6 +265,14 @@ transform:translateY(110vh) rotate(720deg);
 <div class="card">
 <h1>💖 Mono Shri 💖</h1>
 <p>Enter the Secret Code</p>
+   <div id="countdown" style="
+margin:15px 0;
+font-size:20px;
+font-weight:bold;
+color:#ff6b81;
+">
+⏳ Loading Countdown...
+</div>
 
 <div class="pass-boxes">
 <div class="box" id="b1"></div>
@@ -263,8 +283,8 @@ transform:translateY(110vh) rotate(720deg);
    <div class="hints">
   <h3>💡 Hints</h3>
   <ul>
-    <li>✨ A very special year</li>
-    <li>🎂 Related to Mono Shri</li>
+    <li>✨Higest internal marks he scored in sem 4</li>
+    <li>🎂 No of times he shouted on you</li>
     <li>💖 Four digits only</li>
   </ul>
 </div>
@@ -342,7 +362,7 @@ and keep being the wonderful person you are. ✨<br><br>
 <script>
 
 let password="";
-const correct="1922";
+const correct="1231";
 
 function addDigit(n){
 if(password.length<4){
@@ -470,6 +490,31 @@ setTimeout(()=>h.remove(),6000);
 
 },400);
 }
+   function updateCountdown(){
+
+  const birthday = new Date("2026-06-21T00:00:00"); // Change date
+
+  const now = new Date();
+
+  const diff = birthday - now;
+
+  if(diff <= 0){
+    document.getElementById("countdown").innerHTML =
+      "🎂 It's Birthday Time! 🎉";
+    return;
+  }
+
+  const days = Math.floor(diff / (1000*60*60*24));
+  const hours = Math.floor((diff / (1000*60*60)) % 24);
+  const mins = Math.floor((diff / (1000*60)) % 60);
+  const secs = Math.floor((diff / 1000) % 60);
+
+  document.getElementById("countdown").innerHTML =
+    `🎂 ${days}d ${hours}h ${mins}m ${secs}s`;
+}
+
+updateCountdown();
+setInterval(updateCountdown,1000);
 </script>
  
 
