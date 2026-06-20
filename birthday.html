@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Surprise For Mono Shri 💖</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Trebuchet MS',sans-serif;
+}
+
+body{
+background:#fff9df;
+overflow:hidden;
+}
+
+.screen{
+display:none;
+height:100vh;
+width:100%;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:20px;
+}
+
+.active{
+display:flex;
+}
+
+.gingham{
+background:
+linear-gradient(90deg,#fff9df 50%,#fff4c8 50%),
+linear-gradient(#fff9df 50%,#fff4c8 50%);
+background-size:40px 40px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:25px;
+box-shadow:0 8px 20px rgba(0,0,0,.15);
+max-width:420px;
+width:100%;
+}
+
+h1{
+color:#ff6b81;
+margin-bottom:15px;
+}
+
+.pass-boxes{
+display:flex;
+gap:10px;
+justify-content:center;
+margin:15px;
+}
+
+.box{
+width:50px;
+height:50px;
+border:3px solid #ff6b81;
+border-radius:10px;
+background:white;
+font-size:25px;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.keypad{
+display:grid;
+grid-template-columns:repeat(3,70px);
+gap:12px;
+justify-content:center;
+margin-top:15px;
+}
+
+.key{
+width:70px;
+height:70px;
+border-radius:50%;
+border:none;
+font-size:24px;
+background:#ff5a5a;
+color:white;
+cursor:pointer;
+}
+
+.key:hover{
+transform:scale(1.05);
+}
+
+#gameArea{
+position:relative;
+width:100vw;
+height:100vh;
+background:linear-gradient(to bottom,#ffeef6,#fffbe8);
+}
+
+.butterfly{
+position:absolute;
+font-size:60px;
+cursor:pointer;
+animation:float 2s infinite ease-in-out;
+}
+
+@keyframes float{
+0%{transform:translateY(0px);}
+50%{transform:translateY(-15px);}
+100%{transform:translateY(0px);}
+}
+
+.counter{
+position:absolute;
+top:15px;
+left:15px;
+background:white;
+padding:10px 18px;
+border-radius:20px;
+font-weight:bold;
+}
+
+.popup{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.7);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.polaroid{
+background:white;
+padding:15px;
+border-radius:12px;
+width:320px;
+box-shadow:0 0 20px rgba(0,0,0,.3);
+}
+
+.polaroid img{
+width:100%;
+height:320px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.polaroid p{
+margin-top:12px;
+font-size:18px;
+color:#444;
+}
+
+.nextBtn{
+margin-top:15px;
+padding:10px 20px;
+border:none;
+background:#ff6b81;
+color:white;
+border-radius:10px;
+cursor:pointer;
+}
+
+.final{
+background:linear-gradient(135deg,#ffd1dc,#fff0f5);
+}
+
+.final h1{
+font-size:48px;
+}
+
+.message{
+max-width:700px;
+font-size:22px;
+line-height:1.8;
+padding:20px;
+}
+
+.heart{
+position:fixed;
+font-size:25px;
+animation:rise 6s linear infinite;
+}
+
+@keyframes rise{
+from{
+transform:translateY(100vh);
+opacity:1;
+}
+to{
+transform:translateY(-100px);
+opacity:0;
+}
+}
+
+.confetti{
+position:fixed;
+width:10px;
+height:10px;
+top:-10px;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+to{
+transform:translateY(110vh) rotate(720deg);
+}
+}
+</style>
+</head>
+<body>
+
+<!-- PASSCODE PAGE -->
+<div class="screen gingham active" id="login">
+<div class="card">
+<h1>💖 Mono Shri 💖</h1>
+<p>Enter the Secret Code</p>
+
+<div class="pass-boxes">
+<div class="box" id="b1"></div>
+<div class="box" id="b2"></div>
+<div class="box" id="b3"></div>
+<div class="box" id="b4"></div>
+</div>
+
+<p>Hint: A Special Number ✨</p>
+
+<div class="keypad">
+<button class="key" onclick="addDigit('1')">1</button>
+<button class="key" onclick="addDigit('2')">2</button>
+<button class="key" onclick="addDigit('3')">3</button>
+<button class="key" onclick="addDigit('4')">4</button>
+<button class="key" onclick="addDigit('5')">5</button>
+<button class="key" onclick="addDigit('6')">6</button>
+<button class="key" onclick="addDigit('7')">7</button>
+<button class="key" onclick="addDigit('8')">8</button>
+<button class="key" onclick="addDigit('9')">9</button>
+<button class="key" onclick="clearPass()">✖</button>
+<button class="key" onclick="addDigit('0')">0</button>
+<button class="key" onclick="checkPass()">✔</button>
+</div>
+</div>
+</div>
+
+<!-- GAME -->
+<div class="screen" id="game">
+<div id="gameArea">
+<div class="counter">🦋 Caught: <span id="score">0</span>/5</div>
+</div>
+</div>
+
+<!-- PHOTO POPUP -->
+<div class="popup" id="popup">
+<div class="polaroid">
+<img id="popupImg" src="">
+<p id="popupText"></p>
+<button class="nextBtn" onclick="closePopup()">Continue 🦋</button>
+</div>
+</div>
+
+<!-- FINAL -->
+<div class="screen final" id="final">
+<h1>🎂 Happy Birthday 🎂</h1>
+
+<div class="message">
+<b>Mono Shri 💖</b><br><br>
+
+Thank you for being such an amazing person.<br>
+
+May your birthday be filled with happiness,
+laughter, beautiful memories and endless smiles.<br><br>
+
+Keep shining, keep smiling,
+and keep being the wonderful person you are. ✨<br><br>
+
+🦋💖 Happy Birthday Mono Shri 💖🦋
+</div>
+
+<audio id="music" autoplay loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+</div>
+
+<script>
+
+let password="";
+const correct="1922";
+
+function addDigit(n){
+if(password.length<4){
+password+=n;
+updateBoxes();
+}
+}
+
+function updateBoxes(){
+for(let i=0;i<4;i++){
+document.getElementById("b"+(i+1)).innerHTML=password[i]||"";
+}
+}
+
+function clearPass(){
+password="";
+updateBoxes();
+}
+
+function checkPass(){
+if(password===correct){
+document.getElementById("login").classList.remove("active");
+document.getElementById("game").classList.add("active");
+spawnButterfly();
+}
+else{
+alert("Wrong Password 💔");
+password="";
+updateBoxes();
+}
+}
+
+const photos=[
+{
+img:"photo1.jpg",
+msg:"No matter how serious life gets, you'll always find a way to make me laugh 😂❤️"
+},
+{
+img:"photo2.jpg",
+msg:"Your energy is absolutely contagious ✨"
+},
+{
+img:"photo3.jpg",
+msg:"This face deserves its own fan club 😆💖"
+},
+{
+img:"photo4.jpg",
+msg:"You look absolutely stunning 🌹✨"
+},
+{
+img:"photo5.jpg",
+msg:"The best part of every memory is that you were in it 💕"
+}
+];
+
+let current=0;
+
+function spawnButterfly(){
+
+const area=document.getElementById("gameArea");
+
+const b=document.createElement("div");
+b.className="butterfly";
+b.innerHTML="🦋";
+
+b.style.left=Math.random()*(window.innerWidth-80)+"px";
+b.style.top=Math.random()*(window.innerHeight-150)+"px";
+
+b.onclick=function(){
+
+document.getElementById("score").innerText=current+1;
+
+document.getElementById("popupImg").src=photos[current].img;
+document.getElementById("popupText").innerText=photos[current].msg;
+document.getElementById("popup").style.display="flex";
+
+b.remove();
+};
+
+area.appendChild(b);
+}
+
+function closePopup(){
+
+document.getElementById("popup").style.display="none";
+
+current++;
+
+if(current<5){
+spawnButterfly();
+}
+else{
+showFinal();
+}
+}
+
+function showFinal(){
+
+document.getElementById("game").classList.remove("active");
+document.getElementById("final").classList.add("active");
+
+document.getElementById("music").play();
+
+for(let i=0;i<120;i++){
+
+let c=document.createElement("div");
+c.className="confetti";
+
+c.style.left=Math.random()*100+"vw";
+c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+c.style.animationDuration=(Math.random()*3+2)+"s";
+
+document.body.appendChild(c);
+}
+
+setInterval(()=>{
+
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💖";
+h.style.left=Math.random()*100+"vw";
+
+document.body.appendChild(h);
+
+setTimeout(()=>h.remove(),6000);
+
+},400);
+}
+</script>
+
+</body>
+</html>
