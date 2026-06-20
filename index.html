@@ -15,22 +15,26 @@ font-family:'Trebuchet MS',sans-serif;
 }
 
 body{
-   #countdown{
+background:#fff9df;
+overflow:hidden;
+}
+
+#countdown{
 background:#fff0f5;
 padding:12px;
 border-radius:15px;
 box-shadow:0 4px 10px rgba(0,0,0,.1);
 animation:pulse 1.5s infinite;
+margin:15px 0;
+font-size:20px;
+font-weight:bold;
+color:#ff6b81;
 }
 
 @keyframes pulse{
 0%,100%{transform:scale(1);}
 50%{transform:scale(1.05);}
-}
-background:#fff9df;
-overflow:hidden;
-}
-.hints{
+}.hints{
 position:absolute;
 right:30px;
 top:50%;
@@ -280,15 +284,7 @@ color:#ff6b81;
 <div class="box" id="b3"></div>
 <div class="box" id="b4"></div>
 </div>
-   <div class="hints">
-  <h3>💡 Hints</h3>
-  <ul>
-    <li>✨Higest internal marks he scored in sem 4</li>
-    <li>🎂 No of times he shouted on you</li>
-    <li>💖 Four digits only</li>
-  </ul>
-</div>
-</div>
+   
 
 <p>Hint: A Special Number ✨</p>
 
@@ -305,6 +301,15 @@ color:#ff6b81;
 <button class="key" onclick="clearPass()">✖</button>
 <button class="key" onclick="addDigit('0')">0</button>
 <button class="key" onclick="checkPass()">✔</button>
+</div>
+</div>
+   <div class="hints">
+  <h3>💡 Hints</h3>
+  <ul>
+    <li>✨Higest internal marks he scored in sem 4</li>
+    <li>🎂 No of times he shouted on you</li>
+    <li>💖 Four digits only</li>
+  </ul>
 </div>
 </div>
 </div>
