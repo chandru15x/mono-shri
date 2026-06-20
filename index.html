@@ -18,7 +18,38 @@ body{
 background:#fff9df;
 overflow:hidden;
 }
+.hints{
+position:absolute;
+right:30px;
+top:50%;
+transform:translateY(-50%);
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+width:220px;
+text-align:left;
+}
 
+.hints h3{
+color:#ff6b81;
+margin-bottom:10px;
+}
+
+.hints ul{
+padding-left:20px;
+line-height:1.8;
+}
+
+@media(max-width:768px){
+.hints{
+position:static;
+transform:none;
+margin-top:20px;
+width:100%;
+max-width:420px;
+}
+}
 .screen{
 display:none;
 height:100vh;
@@ -228,6 +259,14 @@ transform:translateY(110vh) rotate(720deg);
 <div class="box" id="b2"></div>
 <div class="box" id="b3"></div>
 <div class="box" id="b4"></div>
+   <div class="hints">
+  <h3>💡 Hints</h3>
+  <ul>
+    <li>✨ A very special year</li>
+    <li>🎂 Related to Mono Shri</li>
+    <li>💖 Four digits only</li>
+  </ul>
+</div>
 </div>
 
 <p>Hint: A Special Number ✨</p>
